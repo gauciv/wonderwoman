@@ -67,6 +67,29 @@ export async function deleteInventoryItems(ids: string[]): Promise<void> {
   await batch.commit()
 }
 
+export async function replaceAllInventoryItems(
+  items: Omit<InventoryItem, 'id'>[]
+): Promise<void> {
+  requireFirebase('replaceAllInventoryItems')
+  const CHUNK = 499
+  // Delete all existing
+  const existing = await getDocs(collection(db, COLLECTION))
+  for (let i = 0; i < existing.docs.length; i += CHUNK) {
+    const delBatch = writeBatch(db)
+    existing.docs.slice(i, i + CHUNK).forEach(d => delBatch.delete(d.ref))
+    await delBatch.commit()
+  }
+  // Add new items
+  for (let i = 0; i < items.length; i += CHUNK) {
+    const addBatch = writeBatch(db)
+    items.slice(i, i + CHUNK).forEach(item => {
+      const ref = doc(collection(db, COLLECTION))
+      addBatch.set(ref, item)
+    })
+    await addBatch.commit()
+  }
+}
+
 export function subscribeToInventory(
   callback: (items: InventoryItem[]) => void
 ): () => void {

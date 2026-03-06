@@ -4,7 +4,6 @@ import {
   Package,
   TrendingDown,
   Building2,
-  Upload,
   Settings,
   Package2,
   X
@@ -22,7 +21,6 @@ const navItems = [
   { icon: Package, label: 'Inventory', to: '/dashboard/inventory' },
   { icon: TrendingDown, label: 'Forecast', to: '/dashboard/forecast' },
   { icon: Building2, label: 'Vendors', to: '/dashboard/vendors' },
-  { icon: Upload, label: 'Data Sync', to: '/dashboard/datasync' },
   { icon: Settings, label: 'Settings', to: '/dashboard/settings' },
 ]
 

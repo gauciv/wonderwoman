@@ -35,6 +35,36 @@
 
     --radius: 0.375rem;
   }
+
+  .dark {
+    --background: 222 20% 9%;
+    --foreground: 210 20% 93%;
+
+    --card: 222 20% 12%;
+    --card-foreground: 210 20% 93%;
+
+    --popover: 222 20% 12%;
+    --popover-foreground: 210 20% 93%;
+
+    --primary: 214 82% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 222 20% 17%;
+    --secondary-foreground: 210 20% 90%;
+
+    --muted: 222 20% 17%;
+    --muted-foreground: 210 15% 55%;
+
+    --accent: 214 82% 15%;
+    --accent-foreground: 214 82% 75%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 222 20% 22%;
+    --input: 222 20% 22%;
+    --ring: 214 82% 55%;
+  }
 }
 
 @layer base {
@@ -44,8 +74,9 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
-  /* Scrollbar styling */
+  /* Light scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -58,5 +89,16 @@
   }
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-silver-500;
+  }
+  /* Dark scrollbar */
+  .dark ::-webkit-scrollbar-track {
+    background: hsl(222 20% 14%);
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background: hsl(222 20% 28%);
+    border-radius: 9999px;
+  }
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: hsl(222 20% 38%);
   }
 }

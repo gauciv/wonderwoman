@@ -32,7 +32,9 @@ export default defineConfig({
         'react-router-dom',
         'firebase/app',
         'firebase/auth',
-        'firebase/firestore'
+        'firebase/firestore',
+        'jspdf',
+        'jspdf-autotable'
       ]
     },
     plugins: [react()]

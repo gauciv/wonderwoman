@@ -68,9 +68,9 @@ function SortIcon({ sorted }: { sorted: false | 'asc' | 'desc' }) {
 
 function DetailRow({ label, value }: { label: string; value: React.ReactNode }) {
   return (
-    <div className="flex justify-between gap-4 py-1.5 border-b border-gray-50 last:border-0">
+    <div className="flex justify-between gap-4 py-1.5 border-b border-gray-50 dark:border-gray-800 last:border-0">
       <span className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground shrink-0 w-32">{label}</span>
-      <span className="text-xs text-charcoal-800 text-right">{value ?? '—'}</span>
+      <span className="text-xs text-charcoal-800 dark:text-gray-200 text-right">{value ?? '—'}</span>
     </div>
   )
 }
@@ -137,14 +137,14 @@ export function InventoryTable({
     }),
     columnHelper.accessor('itemCode', {
       header: 'Item Code',
-      cell: info => <span className="font-mono text-[11px] text-charcoal-700">{info.getValue()}</span>,
+      cell: info => <span className="font-mono text-[11px] text-charcoal-700 dark:text-gray-300">{info.getValue()}</span>,
       size: 130,
     }),
     columnHelper.accessor('description', {
       header: 'Description',
       cell: info => (
         <button
-          className="text-xs font-medium text-charcoal-800 hover:text-brand hover:underline text-left leading-tight transition-colors"
+          className="text-xs font-medium text-charcoal-800 dark:text-gray-200 hover:text-brand hover:underline text-left leading-tight transition-colors"
           onClick={() => setViewTarget(info.row.original)}
         >
           {info.getValue()}
@@ -165,7 +165,7 @@ export function InventoryTable({
         return (
           <span className={cn(
             'font-mono text-xs font-semibold',
-            v < 0 ? 'text-destructive' : v === 0 ? 'text-muted-foreground' : 'text-charcoal-800'
+            v < 0 ? 'text-destructive' : v === 0 ? 'text-muted-foreground' : 'text-charcoal-800 dark:text-gray-200'
           )}>
             {v.toLocaleString()}
           </span>
@@ -175,7 +175,7 @@ export function InventoryTable({
     }),
     columnHelper.accessor('salesPerWeek', {
       header: 'Sales/Wk',
-      cell: info => <span className="font-mono text-xs text-charcoal-700">{info.getValue().toLocaleString()}</span>,
+      cell: info => <span className="font-mono text-xs text-charcoal-700 dark:text-gray-300">{info.getValue().toLocaleString()}</span>,
       size: 80,
     }),
     columnHelper.display({
@@ -263,7 +263,7 @@ export function InventoryTable({
       <div className="overflow-x-auto">
         <table className="w-full text-xs border-collapse">
           <thead className="sticky top-0 z-10">
-            <tr className="bg-gray-50 border-b-2 border-silver-300">
+            <tr className="bg-gray-50 dark:bg-gray-800 border-b-2 border-silver-300 dark:border-gray-700">
               <th className="px-3 py-2.5 w-9">
                 <Checkbox
                   checked={sortedRows.length > 0 && sortedRows.every(r => selectedSet.has(r.original.id))}
@@ -340,9 +340,12 @@ export function InventoryTable({
                       <tr
                         key={row.id}
                         className={cn(
-                          'group border-b border-silver-200 hover:bg-brand-50 transition-colors',
-                          selectedSet.has(row.original.id) ? 'bg-blue-50/60'
-                            : rowIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'
+                          'group border-b border-silver-200 dark:border-gray-700 hover:bg-brand-50 dark:hover:bg-brand-900/20 transition-colors',
+                          selectedSet.has(row.original.id)
+                            ? 'bg-blue-50/60 dark:bg-blue-900/20'
+                            : rowIdx % 2 === 0
+                              ? 'bg-white dark:bg-gray-900'
+                              : 'bg-gray-50/50 dark:bg-gray-800/30'
                         )}
                       >
                         {row.getVisibleCells().map(cell => (
@@ -391,7 +394,7 @@ export function InventoryTable({
               <DetailRow label="Vendor" value={viewTarget.vendor} />
               <DetailRow label="Category" value={viewTarget.category || '—'} />
               <DetailRow label="Pref. Vendor" value={viewTarget.prefVendor || '—'} />
-              <div className="my-2 border-t" />
+              <div className="my-2 border-t dark:border-gray-700" />
               <DetailRow label="On Hand" value={
                 <span className={cn('font-mono font-semibold', viewTarget.onHand < 0 && 'text-destructive')}>
                   {viewTarget.onHand.toLocaleString()}
@@ -407,8 +410,8 @@ export function InventoryTable({
                   <span className={cn(
                     'font-mono font-semibold',
                     (viewTarget.onHand / viewTarget.salesPerWeek) < 2 ? 'text-destructive'
-                      : (viewTarget.onHand / viewTarget.salesPerWeek) < 4 ? 'text-amber-600'
-                      : 'text-emerald-600'
+                      : (viewTarget.onHand / viewTarget.salesPerWeek) < 4 ? 'text-amber-600 dark:text-amber-400'
+                      : 'text-emerald-600 dark:text-emerald-400'
                   )}>
                     {(viewTarget.onHand / viewTarget.salesPerWeek).toFixed(1)} wks
                   </span>
@@ -416,7 +419,7 @@ export function InventoryTable({
               )}
             </div>
           )}
-          <div className="flex justify-end gap-2 pt-2 border-t mt-2">
+          <div className="flex justify-end gap-2 pt-2 border-t dark:border-gray-700 mt-2">
             <Button size="sm" variant="outline" onClick={() => { setViewTarget(null); onEdit(viewTarget!) }}>
               <Pencil className="h-3 w-3 mr-1" /> Edit
             </Button>

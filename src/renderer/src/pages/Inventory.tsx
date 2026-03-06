@@ -85,12 +85,12 @@ export default function Inventory(): JSX.Element {
   return (
     <div className="flex flex-col h-full">
       {/* Top bar */}
-      <div className="shrink-0 border-b bg-white px-4 py-3 space-y-3">
+      <div className="shrink-0 border-b bg-white dark:bg-gray-900 dark:border-gray-800 px-4 py-3 space-y-3 transition-colors duration-200">
         {/* Title + actions row */}
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <Package className="h-4 w-4 text-brand" />
-            <span className="text-sm font-semibold text-charcoal-800">Inventory Items</span>
+            <span className="text-sm font-semibold text-charcoal-800 dark:text-gray-100">Inventory Items</span>
             <Badge variant="info" className="text-[10px] font-mono">
               {items.length} / {total}
             </Badge>
@@ -133,11 +133,11 @@ export default function Inventory(): JSX.Element {
               placeholder="Search code or description…"
               value={filters.search}
               onChange={e => setFilters(f => ({ ...f, search: e.target.value }))}
-              className="pl-8 h-8 text-xs bg-gray-50 border-silver-300"
+              className="pl-8 h-8 text-xs bg-gray-50 dark:bg-gray-800 border-silver-300 dark:border-gray-700"
             />
           </div>
           <Select value={filters.vendor} onValueChange={v => setFilters(f => ({ ...f, vendor: v }))}>
-            <SelectTrigger className="h-8 text-xs w-[170px] bg-gray-50 border-silver-300">
+            <SelectTrigger className="h-8 text-xs w-[170px] bg-gray-50 dark:bg-gray-800 border-silver-300 dark:border-gray-700">
               <Filter className="h-3 w-3 mr-1 text-muted-foreground" />
               <SelectValue placeholder="All vendors" />
             </SelectTrigger>
@@ -147,7 +147,7 @@ export default function Inventory(): JSX.Element {
             </SelectContent>
           </Select>
           <Select value={filters.category} onValueChange={v => setFilters(f => ({ ...f, category: v }))}>
-            <SelectTrigger className="h-8 text-xs w-[170px] bg-gray-50 border-silver-300">
+            <SelectTrigger className="h-8 text-xs w-[170px] bg-gray-50 dark:bg-gray-800 border-silver-300 dark:border-gray-700">
               <SelectValue placeholder="All categories" />
             </SelectTrigger>
             <SelectContent>
@@ -159,7 +159,7 @@ export default function Inventory(): JSX.Element {
             value={filters.stockStatus}
             onValueChange={v => setFilters(f => ({ ...f, stockStatus: v as InventoryFilters['stockStatus'] }))}
           >
-            <SelectTrigger className="h-8 text-xs w-[140px] bg-gray-50 border-silver-300">
+            <SelectTrigger className="h-8 text-xs w-[140px] bg-gray-50 dark:bg-gray-800 border-silver-300 dark:border-gray-700">
               <SelectValue placeholder="Stock status" />
             </SelectTrigger>
             <SelectContent>

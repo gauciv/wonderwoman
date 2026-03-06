@@ -5,6 +5,7 @@ import {
   updateInventoryItem,
   deleteInventoryItem,
   deleteInventoryItems,
+  replaceAllInventoryItems,
 } from '../lib/inventory-service'
 import { isFirebaseConfigured } from '../lib/firebase'
 import { inventorySeed } from '../lib/inventory-seed'
@@ -31,7 +32,9 @@ export function useInventory(filters: InventoryFilters) {
     }
     try {
       const unsubscribe = subscribeToInventory((firestoreItems) => {
-        setAllItems(firestoreItems.length > 0 ? firestoreItems : inventorySeed)
+        // Always use Firestore data when Firebase is configured.
+        // Seed data is only shown in local (non-Firebase) mode.
+        setAllItems(firestoreItems)
         setLoading(false)
       })
       return unsubscribe
@@ -78,6 +81,19 @@ export function useInventory(filters: InventoryFilters) {
     }
   }, [])
 
+  const replaceAll = useCallback(async (items: Omit<InventoryItem, 'id'>[]): Promise<void> => {
+    if (isFirebaseConfigured) {
+      await replaceAllInventoryItems(items)
+      // onSnapshot handles the state update
+    } else {
+      const newItems: InventoryItem[] = items.map((item, idx) => ({
+        ...item,
+        id: `LOCAL-${Date.now()}-${idx}`,
+      }))
+      setAllItems(newItems)
+    }
+  }, [])
+
   // --- Filtering ---
 
   const filtered = useMemo(() => {
@@ -121,5 +137,6 @@ export function useInventory(filters: InventoryFilters) {
     updateItem,
     deleteItem,
     deleteItems,
+    replaceAll,
   }
 }

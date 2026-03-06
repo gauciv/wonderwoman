@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
+import { ThemeProvider } from './contexts/ThemeContext'
 import { ProtectedRoute } from './components/auth/ProtectedRoute'
 import { DashboardLayout } from './components/layout/DashboardLayout'
 import { FirebaseSetupModal } from './components/FirebaseSetupModal'
@@ -9,7 +10,7 @@ import DashboardHome from './pages/DashboardHome'
 import Inventory from './pages/Inventory'
 import Forecast from './pages/Forecast'
 import Vendors from './pages/Vendors'
-import DataSync from './pages/DataSync'
+import Settings from './pages/Settings'
 
 function wrap(child: JSX.Element): JSX.Element {
   return (
@@ -21,24 +22,23 @@ function wrap(child: JSX.Element): JSX.Element {
 
 function App(): JSX.Element {
   return (
-    <BrowserRouter>
-      <FirebaseSetupModal open={!isFirebaseConfigured} />
-      <AuthProvider>
-        <Routes>
-          <Route path="/" element={<Navigate to="/login" replace />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={wrap(<DashboardHome />)} />
-          <Route path="/dashboard/inventory" element={wrap(<Inventory />)} />
-          <Route path="/dashboard/forecast" element={wrap(<Forecast />)} />
-          <Route path="/dashboard/vendors" element={wrap(<Vendors />)} />
-          <Route path="/dashboard/datasync" element={wrap(<DataSync />)} />
-          <Route path="/dashboard/settings" element={wrap(
-            <div className="p-6 text-sm text-muted-foreground">Settings — coming soon</div>
-          )} />
-          <Route path="*" element={<Navigate to="/login" replace />} />
-        </Routes>
-      </AuthProvider>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <FirebaseSetupModal open={!isFirebaseConfigured} />
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/dashboard" element={wrap(<DashboardHome />)} />
+            <Route path="/dashboard/inventory" element={wrap(<Inventory />)} />
+            <Route path="/dashboard/forecast" element={wrap(<Forecast />)} />
+            <Route path="/dashboard/vendors" element={wrap(<Vendors />)} />
+            <Route path="/dashboard/settings" element={wrap(<Settings />)} />
+            <Route path="*" element={<Navigate to="/login" replace />} />
+          </Routes>
+        </AuthProvider>
+      </BrowserRouter>
+    </ThemeProvider>
   )
 }
 

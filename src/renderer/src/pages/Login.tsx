@@ -36,10 +36,12 @@ export default function Login(): JSX.Element {
   }
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-white">
-      {/* Left Panel — Brand */}
-      <div className="hidden md:flex md:w-2/5 lg:w-[38%] flex-col justify-between p-8 xl:p-12"
-        style={{ background: 'linear-gradient(160deg, #0A2040 0%, #0D2B52 60%, #1060C0 100%)' }}>
+    <div className="flex h-screen w-screen overflow-hidden bg-white dark:bg-gray-950 transition-colors duration-200">
+      {/* Left Panel — Brand (always dark navy, no dark: needed) */}
+      <div
+        className="hidden md:flex md:w-2/5 lg:w-[38%] flex-col justify-between p-8 xl:p-12"
+        style={{ background: 'linear-gradient(160deg, #0A2040 0%, #0D2B52 60%, #1060C0 100%)' }}
+      >
         {/* Logo */}
         <div className="flex items-center gap-2.5">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 shadow border border-white/20">
@@ -82,19 +84,19 @@ export default function Login(): JSX.Element {
       </div>
 
       {/* Right Panel — Form */}
-      <div className="flex flex-1 flex-col items-center justify-center px-6 py-10 bg-gray-50">
+      <div className="flex flex-1 flex-col items-center justify-center px-6 py-10 bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
         {/* Mobile logo */}
         <div className="flex md:hidden items-center gap-2 mb-8">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-navy-950 shadow">
             <Package2 className="h-4 w-4 text-white" />
           </div>
-          <span className="text-base font-bold text-charcoal tracking-tight">PharmaTracker</span>
+          <span className="text-base font-bold text-charcoal dark:text-gray-100 tracking-tight">PharmaTracker</span>
         </div>
 
         <div className="w-full max-w-[360px] space-y-6">
           {/* Heading */}
           <div className="space-y-1">
-            <h2 className="text-2xl font-bold text-charcoal-900 tracking-tight">Welcome back</h2>
+            <h2 className="text-2xl font-bold text-charcoal-900 dark:text-gray-50 tracking-tight">Welcome back</h2>
             <p className="text-sm text-muted-foreground">Sign in to your account to continue</p>
           </div>
 
@@ -109,7 +111,7 @@ export default function Login(): JSX.Element {
 
             {/* Email */}
             <div className="space-y-1.5">
-              <Label htmlFor="email" className="text-xs font-semibold text-charcoal-700 uppercase tracking-wide">
+              <Label htmlFor="email" className="text-xs font-semibold text-charcoal-700 dark:text-gray-300 uppercase tracking-wide">
                 Email Address
               </Label>
               <Input
@@ -120,13 +122,13 @@ export default function Login(): JSX.Element {
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="email"
                 disabled={loading}
-                className="h-10 bg-white border-silver-300 focus-visible:ring-brand text-sm"
+                className="h-10 bg-white dark:bg-gray-800 border-silver-300 dark:border-gray-700 focus-visible:ring-brand text-sm"
               />
             </div>
 
             {/* Password */}
             <div className="space-y-1.5">
-              <Label htmlFor="password" className="text-xs font-semibold text-charcoal-700 uppercase tracking-wide">
+              <Label htmlFor="password" className="text-xs font-semibold text-charcoal-700 dark:text-gray-300 uppercase tracking-wide">
                 Password
               </Label>
               <div className="relative">
@@ -138,7 +140,7 @@ export default function Login(): JSX.Element {
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
                   disabled={loading}
-                  className="h-10 bg-white border-silver-300 focus-visible:ring-brand text-sm pr-10"
+                  className="h-10 bg-white dark:bg-gray-800 border-silver-300 dark:border-gray-700 focus-visible:ring-brand text-sm pr-10"
                 />
                 <button
                   type="button"
@@ -167,7 +169,7 @@ export default function Login(): JSX.Element {
               {loading ? (
                 <span className="flex items-center gap-2">
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  Signing in...
+                  Signing in…
                 </span>
               ) : (
                 'Sign In'
