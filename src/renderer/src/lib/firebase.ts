@@ -1,21 +1,36 @@
-import { initializeApp } from 'firebase/app'
-import { getAuth } from 'firebase/auth'
-import { getFirestore } from 'firebase/firestore'
+import { initializeApp, type FirebaseApp } from 'firebase/app'
+import { getAuth, type Auth } from 'firebase/auth'
+import { getFirestore, type Firestore } from 'firebase/firestore'
 
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-}
+const apiKey = import.meta.env.VITE_FIREBASE_API_KEY
+const projectId = import.meta.env.VITE_FIREBASE_PROJECT_ID
 
 export const isFirebaseConfigured =
-  typeof firebaseConfig.apiKey === 'string' && firebaseConfig.apiKey.length > 0 &&
-  typeof firebaseConfig.projectId === 'string' && firebaseConfig.projectId.length > 0
+  typeof apiKey === 'string' && apiKey.length > 0 &&
+  typeof projectId === 'string' && projectId.length > 0
 
-const app = initializeApp(firebaseConfig)
-export const auth = getAuth(app)
-export const db = getFirestore(app)
+// Only initialize Firebase when credentials are present.
+// getAuth() throws auth/invalid-api-key at module load time if apiKey is missing,
+// which would crash the entire renderer before React even mounts.
+let _app: FirebaseApp | undefined
+let _auth: Auth | undefined
+let _db: Firestore | undefined
+
+if (isFirebaseConfigured) {
+  _app = initializeApp({
+    apiKey,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  })
+  _auth = getAuth(_app)
+  _db = getFirestore(_app)
+}
+
+// Consumers always guard with isFirebaseConfigured before using these
+export const app = _app as FirebaseApp
+export const auth = _auth as Auth
+export const db = _db as Firestore
 export default app
