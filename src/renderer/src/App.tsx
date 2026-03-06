@@ -4,6 +4,7 @@ import { ProtectedRoute } from './components/auth/ProtectedRoute'
 import { DashboardLayout } from './components/layout/DashboardLayout'
 import Login from './pages/Login'
 import DashboardHome from './pages/DashboardHome'
+import Inventory from './pages/Inventory'
 
 function App(): JSX.Element {
   return (
@@ -27,9 +28,7 @@ function App(): JSX.Element {
             element={
               <ProtectedRoute>
                 <DashboardLayout>
-                  <div className="p-6">
-                    <p className="text-sm text-muted-foreground">Inventory table — Phase 4</p>
-                  </div>
+                  <Inventory />
                 </DashboardLayout>
               </ProtectedRoute>
             }
@@ -39,9 +38,7 @@ function App(): JSX.Element {
             element={
               <ProtectedRoute>
                 <DashboardLayout>
-                  <div className="p-6">
-                    <p className="text-sm text-muted-foreground">Reports — coming soon</p>
-                  </div>
+                  <div className="p-6 text-sm text-muted-foreground">Reports — coming soon</div>
                 </DashboardLayout>
               </ProtectedRoute>
             }
@@ -51,9 +48,7 @@ function App(): JSX.Element {
             element={
               <ProtectedRoute>
                 <DashboardLayout>
-                  <div className="p-6">
-                    <p className="text-sm text-muted-foreground">Settings — coming soon</p>
-                  </div>
+                  <div className="p-6 text-sm text-muted-foreground">Settings — coming soon</div>
                 </DashboardLayout>
               </ProtectedRoute>
             }
