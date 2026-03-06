@@ -18,7 +18,10 @@ export default defineConfig({
         // esbuild processes the CJS files during optimizeDeps and emits proper
         // ESM named exports via static exports.xxx analysis.
         'tailwind-merge': resolve('node_modules/tailwind-merge/dist/bundle-cjs.js'),
-        '@tanstack/react-table': resolve('node_modules/@tanstack/react-table/build/lib/index.js')
+        '@tanstack/react-table': resolve('node_modules/@tanstack/react-table/build/lib/index.js'),
+        // jspdf ESM dynamically imports 'dompurify' (not installed); alias to Node CJS build.
+        'jspdf': resolve('node_modules/jspdf/dist/jspdf.node.js'),
+        'jspdf-autotable': resolve('node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js')
       }
     },
     optimizeDeps: {
