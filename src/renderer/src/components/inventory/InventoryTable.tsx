@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { Fragment, useMemo, useState } from 'react'
 import {
   useReactTable,
   getCoreRowModel,
@@ -305,8 +305,8 @@ export function InventoryTable({
                 const vendorOnHand = vendorItems.reduce((s, i) => s + i.onHand, 0)
                 const vendorSales = vendorItems.reduce((s, i) => s + i.salesPerWeek, 0)
                 return (
-                  <>
-                    <tr key={`vendor-${vendor}`}
+                  <Fragment key={vendor}>
+                    <tr
                       className="cursor-pointer select-none"
                       onClick={() => toggleVendor(vendor)}
                       style={{ background: '#0D2B52' }}
@@ -356,7 +356,7 @@ export function InventoryTable({
                         ))}
                       </tr>
                     ))}
-                  </>
+                  </Fragment>
                 )
               })
             )}
