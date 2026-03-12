@@ -1,11 +1,12 @@
 import { useState, FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Eye, EyeOff, Package2, ShieldCheck, BarChart3, Loader2 } from 'lucide-react'
+import { Eye, EyeOff, ShieldCheck, BarChart3, Package2, Loader2 } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
 import { Button } from '../components/ui/button'
 import { Input } from '../components/ui/input'
 import { Label } from '../components/ui/label'
 import { cn } from '../lib/utils'
+import logo from '../assets/logo.png'
 
 export default function Login(): JSX.Element {
   const navigate = useNavigate()
@@ -44,9 +45,7 @@ export default function Login(): JSX.Element {
       >
         {/* Logo */}
         <div className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 shadow border border-white/20">
-            <Package2 className="h-5 w-5 text-white" />
-          </div>
+          <img src={logo} alt="PharmaTracker" className="h-9 w-9 rounded-lg object-contain" />
           <span className="text-lg font-bold text-white tracking-tight">PharmaTracker</span>
         </div>
 
@@ -87,9 +86,7 @@ export default function Login(): JSX.Element {
       <div className="flex flex-1 flex-col items-center justify-center px-6 py-10 bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
         {/* Mobile logo */}
         <div className="flex md:hidden items-center gap-2 mb-8">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-navy-950 shadow">
-            <Package2 className="h-4 w-4 text-white" />
-          </div>
+          <img src={logo} alt="PharmaTracker" className="h-8 w-8 rounded-lg object-contain" />
           <span className="text-base font-bold text-charcoal dark:text-gray-100 tracking-tight">PharmaTracker</span>
         </div>
 

@@ -5,11 +5,11 @@ import {
   TrendingDown,
   Building2,
   Settings,
-  Package2,
   X
 } from 'lucide-react'
 import { cn } from '../../lib/utils'
 import { Separator } from '../ui/separator'
+import logo from '../../assets/logo.png'
 
 interface SidebarProps {
   open: boolean
@@ -48,9 +48,7 @@ export function Sidebar({ open, onClose }: SidebarProps): JSX.Element {
         {/* Brand */}
         <div className="flex h-14 items-center justify-between px-4 shrink-0">
           <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-md bg-white/10 border border-white/20">
-              <Package2 className="h-4 w-4 text-white" />
-            </div>
+            <img src={logo} alt="PharmaTracker" className="h-7 w-7 rounded-md object-contain" />
             <span className="text-sm font-bold text-white tracking-tight">PharmaTracker</span>
           </div>
           <button
