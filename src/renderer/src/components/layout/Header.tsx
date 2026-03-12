@@ -74,7 +74,7 @@ export function Header({ onMenuClick }: HeaderProps): JSX.Element {
           >
             <Menu className="h-4 w-4" />
           </Button>
-          <h1 className="text-base font-semibold text-charcoal-800 dark:text-gray-100">{title}</h1>
+          <h1 className="text-base font-semibold text-charcoal-800 dark:text-gray-100 tracking-tight">{title}</h1>
         </div>
 
         {/* Right */}

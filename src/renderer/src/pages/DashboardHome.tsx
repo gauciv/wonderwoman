@@ -23,7 +23,7 @@ function StatCard({ title, value, sub, icon: Icon, iconColor, iconBg, valueColor
   return (
     <Card className="border-silver-200 dark:border-gray-800">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        <CardTitle className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
           {title}
         </CardTitle>
         <div className={`flex h-8 w-8 items-center justify-center rounded-md ${iconBg}`}>
@@ -33,7 +33,7 @@ function StatCard({ title, value, sub, icon: Icon, iconColor, iconBg, valueColor
       <CardContent>
         <div className="flex items-end justify-between">
           <div>
-            <p className={cn('text-2xl font-bold leading-none', valueColor ?? 'text-charcoal-800 dark:text-gray-100')}>{value}</p>
+            <p className={cn('text-2xl font-semibold leading-none', valueColor ?? 'text-charcoal-800 dark:text-gray-100')}>{value}</p>
             <p className="text-xs text-muted-foreground mt-1">{sub}</p>
           </div>
           {badge && (
@@ -98,13 +98,6 @@ export default function DashboardHome(): JSX.Element {
   return (
     <div className="h-full overflow-y-auto bg-gray-50 dark:bg-gray-950 transition-colors duration-200">
       <div className="p-4 xl:p-6 space-y-5">
-        <div>
-          <h2 className="text-lg font-bold text-charcoal-800 dark:text-gray-100">Inventory Overview</h2>
-          <p className="text-xs text-muted-foreground mt-0.5">
-            {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-          </p>
-        </div>
-
         {/* KPI cards */}
         <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
           <StatCard
@@ -150,7 +143,7 @@ export default function DashboardHome(): JSX.Element {
             <TrendingUp className="h-4 w-4 text-brand" />
             <span className="text-sm font-semibold text-charcoal-800 dark:text-gray-100">Total On Hand</span>
           </div>
-          <div className="flex items-center gap-1.5 text-lg font-bold text-charcoal-800 dark:text-gray-100">
+          <div className="flex items-center gap-1.5 text-lg font-semibold text-charcoal-800 dark:text-gray-100">
             {totalOnHand.toLocaleString()}
             <span className="text-xs font-normal text-muted-foreground">units across all vendors</span>
           </div>

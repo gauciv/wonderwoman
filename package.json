@@ -5,10 +5,10 @@
   "main": "./out/main/index.js",
   "homepage": ".",
   "scripts": {
-    "dev": "env -u ELECTRON_RUN_AS_NODE electron-vite dev",
-    "build": "env -u ELECTRON_RUN_AS_NODE tsc && electron-vite build",
-    "preview": "env -u ELECTRON_RUN_AS_NODE electron-vite preview",
-    "start": "env -u ELECTRON_RUN_AS_NODE electron-vite preview",
+    "dev": "node scripts/unset-electron-node.js electron-vite dev",
+    "build": "node scripts/unset-electron-node.js tsc && node scripts/unset-electron-node.js electron-vite build",
+    "preview": "node scripts/unset-electron-node.js electron-vite preview",
+    "start": "node scripts/unset-electron-node.js electron-vite preview",
     "typecheck": "tsc --noEmit",
     "postinstall": "node scripts/fix-cac-esm.js"
   },
@@ -48,7 +48,9 @@
     "electron": "^31.0.1",
     "electron-builder": "^24.13.3",
     "electron-vite": "^2.3.0",
+    "png-to-ico": "^3.0.1",
     "postcss": "^8.4.38",
+    "sharp": "^0.34.5",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.4.5",
     "vite": "^5.3.1"

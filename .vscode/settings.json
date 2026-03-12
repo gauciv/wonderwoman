@@ -1,0 +1,42 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "npx tsc": true,
+        "git add": true,
+        "feat:": true,
+        "desktop": true,
+        "git commit": true,
+        "Replace": true,
+        "Firestore": true,
+        "fix:": true,
+        "npx sharp-cli": true,
+        "npx sharp": true,
+        "/^cd \"c:/Users/Justin/Documents/projects/wonderwoman\" ; node -e \"\nconst sharp = require\\('sharp'\\);\nconsole\\.log\\('sharp available'\\);\n\" 2>/dev/null ; echo \"sharp not available, trying to install\\.\\.\\.\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "npm install": true,
+        "/^cd \"c:/Users/Justin/Documents/projects/wonderwoman\" ; node -e \"\nconst sharp = require\\('sharp'\\);\n\n// Original is 2816x1536\\. Center-crop to square \\(1536x1536\\) to get the icon portion\nsharp\\('pharma-track-logo\\.png'\\)\n  \\.extract\\(\\{ left: Math\\.floor\\(\\(2816 - 1536\\) / 2\\), top: 0, width: 1536, height: 1536 \\}\\)\n  \\.resize\\(512, 512\\)\n  \\.png\\(\\)\n  \\.toFile\\('resources/icon\\.png'\\)\n  \\.then\\(\\(\\) => console\\.log\\('icon\\.png created: 512x512'\\)\\)\n  \\.catch\\(e => console\\.error\\(e\\)\\);\n\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^cd \"c:/Users/Justin/Documents/projects/wonderwoman\" ; node -e \"\nconst sharp = require\\('sharp'\\);\n\n// Create ICO-compatible 256x256 PNG for Windows icon\nsharp\\('pharma-track-logo\\.png'\\)\n  \\.extract\\(\\{ left: Math\\.floor\\(\\(2816 - 1536\\) / 2\\), top: 0, width: 1536, height: 1536 \\}\\)\n  \\.resize\\(256, 256\\)\n  \\.png\\(\\)\n  \\.toFile\\('resources/icon\\.ico'\\)\n  \\.then\\(\\(\\) => console\\.log\\('icon\\.ico created: 256x256'\\)\\)\n  \\.catch\\(e => console\\.error\\(e\\)\\);\n\" ; ls -la resources/icon\\.png resources/icon\\.ico$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "Place": true,
+        "in": true,
+        "above": true,
+        "EOF": true,
+        "base64": true,
+        "Show": true,
+        "gradient": true,
+        "1.2s.": true,
+        "body": true,
+        "mounts.": true,
+        "Co-Authored-By:": true,
+        "Add": true,
+        "explaining": true,
+        "critical/low/healthy/": true,
+        "default": true
+    }
+}
