@@ -173,7 +173,7 @@ export default function Inventory(): JSX.Element {
       </div>
 
       {/* Table */}
-      <div className="flex-1 overflow-auto">
+      <div className="flex-1 min-h-0 overflow-hidden">
         <InventoryTable
           items={items}
           loading={loading}
@@ -181,6 +181,7 @@ export default function Inventory(): JSX.Element {
           onSelectionChange={setSelectedIds}
           onEdit={openEdit}
           onDelete={handleDelete}
+          paginate={hasActiveFilters}
         />
       </div>
 

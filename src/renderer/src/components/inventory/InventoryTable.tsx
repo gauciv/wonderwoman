@@ -4,13 +4,16 @@ import {
   getCoreRowModel,
   getSortedRowModel,
   getFilteredRowModel,
+  getPaginationRowModel,
   flexRender,
   createColumnHelper,
   SortingState,
+  PaginationState,
 } from '@tanstack/react-table'
 import {
   ArrowUpDown, ArrowUp, ArrowDown,
   ChevronRight, ChevronDown as ChevronDownIcon,
+  ChevronLeft, ChevronsLeft, ChevronsRight,
   MoreHorizontal, Pencil, Trash2, Eye,
 } from 'lucide-react'
 import { InventoryItem, getStockStatus } from '../../types/inventory'
@@ -49,6 +52,7 @@ interface InventoryTableProps {
   onSelectionChange: (ids: string[]) => void
   onEdit: (item: InventoryItem) => void
   onDelete: (id: string) => void
+  paginate?: boolean
 }
 
 const columnHelper = createColumnHelper<InventoryItem>()
@@ -82,8 +86,10 @@ export function InventoryTable({
   onSelectionChange,
   onEdit,
   onDelete,
+  paginate = false,
 }: InventoryTableProps) {
   const [sorting, setSorting] = useState<SortingState>([])
+  const [pagination, setPagination] = useState<PaginationState>({ pageIndex: 0, pageSize: 50 })
   const [collapsedVendors, setCollapsedVendors] = useState<Set<string>>(new Set())
   const [deleteTarget, setDeleteTarget] = useState<InventoryItem | null>(null)
   const [viewTarget, setViewTarget] = useState<InventoryItem | null>(null)
@@ -222,14 +228,18 @@ export function InventoryTable({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   ], [selectedSet])
 
+  const effectivePagination = paginate ? pagination : { pageIndex: 0, pageSize: items.length || 1 }
+
   const table = useReactTable({
     data: items,
     columns,
-    state: { sorting },
+    state: { sorting, pagination: effectivePagination },
     onSortingChange: setSorting,
+    onPaginationChange: paginate ? setPagination : undefined,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    ...(paginate ? { getPaginationRowModel: getPaginationRowModel() } : {}),
   })
 
   const sortedRows = table.getRowModel().rows
@@ -259,8 +269,8 @@ export function InventoryTable({
   }
 
   return (
-    <>
-      <div className="overflow-x-auto">
+    <div className="flex flex-col h-full overflow-hidden">
+      <div className="flex-1 overflow-auto min-h-0">
         <table className="w-full text-xs border-collapse">
           <thead className="sticky top-0 z-10">
             <tr className="bg-gray-50 dark:bg-gray-800 border-b-2 border-silver-300 dark:border-gray-700">
@@ -364,6 +374,36 @@ export function InventoryTable({
         </table>
       </div>
 
+      {/* Pagination — only when filtered */}
+      {paginate && (
+        <div className="shrink-0 flex items-center justify-between border-t bg-white dark:bg-gray-900 dark:border-gray-800 px-4 py-2">
+          <span className="text-[11px] text-muted-foreground">
+            Page {table.getState().pagination.pageIndex + 1} of {Math.max(table.getPageCount(), 1)} ({items.length} items)
+          </span>
+          <div className="flex items-center gap-1">
+            <Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => table.setPageIndex(0)} disabled={!table.getCanPreviousPage()}>
+              <ChevronsLeft className="h-3.5 w-3.5" />
+            </Button>
+            <Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
+              <ChevronLeft className="h-3.5 w-3.5" />
+            </Button>
+            <Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
+              <ChevronRight className="h-3.5 w-3.5" />
+            </Button>
+            <Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => table.setPageIndex(table.getPageCount() - 1)} disabled={!table.getCanNextPage()}>
+              <ChevronsRight className="h-3.5 w-3.5" />
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* Item count footer — when not paginated */}
+      {!paginate && (
+        <div className="shrink-0 border-t bg-white dark:bg-gray-900 dark:border-gray-800 px-4 py-2">
+          <span className="text-[11px] text-muted-foreground">{items.length} items</span>
+        </div>
+      )}
+
       {/* Delete confirmation */}
       <AlertDialog open={deleteTarget != null} onOpenChange={open => !open && setDeleteTarget(null)}>
         <AlertDialogContent>
@@ -427,6 +467,6 @@ export function InventoryTable({
           </div>
         </DialogContent>
       </Dialog>
-    </>
+    </div>
   )
 }
