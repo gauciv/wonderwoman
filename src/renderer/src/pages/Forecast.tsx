@@ -205,7 +205,7 @@ export default function Forecast(): JSX.Element {
   const noDataCount = forecastRows.filter(r => r.status === 'no-data').length
 
   return (
-    <div className="flex flex-col h-full bg-gray-50 dark:bg-gray-950 transition-colors duration-200">
+    <div className="flex flex-col flex-1 min-h-0 bg-gray-50 dark:bg-gray-950 transition-colors duration-200">
       {/* ── Header ── */}
       <div className="shrink-0 border-b bg-white dark:bg-gray-900 dark:border-gray-800 px-4 py-3 space-y-3">
         <div className="flex items-center justify-between">

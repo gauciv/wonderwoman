@@ -54,14 +54,14 @@ export default function Vendors(): JSX.Element {
 
   if (loading) {
     return (
-      <div className="h-full flex items-center justify-center bg-gray-50 dark:bg-gray-950">
+      <div className="flex-1 flex items-center justify-center bg-gray-50 dark:bg-gray-950">
         <Loader2 className="h-6 w-6 animate-spin text-brand" />
       </div>
     )
   }
 
   return (
-    <div className="flex flex-col h-full bg-gray-50 dark:bg-gray-950 transition-colors duration-200">
+    <div className="flex flex-col flex-1 min-h-0 bg-gray-50 dark:bg-gray-950 transition-colors duration-200">
       <div className="shrink-0 border-b bg-white dark:bg-gray-900 dark:border-gray-800 px-4 py-3 flex items-center gap-2">
         <Building2 className="h-4 w-4 text-brand" />
         <span className="text-sm font-semibold text-charcoal-800 dark:text-gray-100">Vendor Directory</span>

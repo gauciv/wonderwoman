@@ -15,7 +15,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps): JSX.Element
       <div className="flex flex-1 flex-col overflow-hidden min-w-0">
         <Header onMenuClick={() => setSidebarOpen(true)} />
         {/* overflow-hidden so each page manages its own scroll — prevents the white area below table */}
-        <main className="flex-1 overflow-hidden min-h-0">
+        <main className="flex flex-col flex-1 overflow-hidden min-h-0">
           {children}
         </main>
       </div>

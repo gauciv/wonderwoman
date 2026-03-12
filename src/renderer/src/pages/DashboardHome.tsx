@@ -89,14 +89,14 @@ export default function DashboardHome(): JSX.Element {
 
   if (loading) {
     return (
-      <div className="h-full flex items-center justify-center bg-gray-50 dark:bg-gray-950">
+      <div className="flex-1 flex items-center justify-center bg-gray-50 dark:bg-gray-950">
         <Loader2 className="h-6 w-6 animate-spin text-brand" />
       </div>
     )
   }
 
   return (
-    <div className="h-full overflow-y-auto bg-gray-50 dark:bg-gray-950 transition-colors duration-200">
+    <div className="flex-1 overflow-y-auto bg-gray-50 dark:bg-gray-950 transition-colors duration-200">
       <div className="p-4 xl:p-6 space-y-5">
         {/* KPI cards */}
         <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">

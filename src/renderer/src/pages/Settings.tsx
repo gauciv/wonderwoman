@@ -162,7 +162,7 @@ export default function Settings(): JSX.Element {
   }
 
   return (
-    <div className="h-full overflow-y-auto bg-gray-50 dark:bg-gray-950 transition-colors duration-200">
+    <div className="flex-1 overflow-y-auto bg-gray-50 dark:bg-gray-950 transition-colors duration-200">
       <div className="max-w-2xl mx-auto p-6 space-y-6">
 
         {/* Page title */}

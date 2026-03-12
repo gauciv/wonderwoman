@@ -269,7 +269,7 @@ export function InventoryTable({
   }
 
   return (
-    <div className="flex flex-col h-full overflow-hidden">
+    <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
       <div className="flex-1 overflow-auto min-h-0">
         <table className="w-full text-xs border-collapse">
           <thead className="sticky top-0 z-10">

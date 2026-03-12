@@ -83,7 +83,7 @@ export default function Inventory(): JSX.Element {
     filters.category !== 'all' || filters.stockStatus !== 'all'
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col flex-1 min-h-0">
       {/* Top bar */}
       <div className="shrink-0 border-b bg-white dark:bg-gray-900 dark:border-gray-800 px-4 py-3 space-y-3 transition-colors duration-200">
         {/* Title + actions row */}
@@ -173,7 +173,7 @@ export default function Inventory(): JSX.Element {
       </div>
 
       {/* Table */}
-      <div className="flex-1 min-h-0 overflow-hidden">
+      <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
         <InventoryTable
           items={items}
           loading={loading}
