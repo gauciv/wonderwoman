@@ -83,7 +83,8 @@ export default function Inventory(): JSX.Element {
     filters.category !== 'all' || filters.stockStatus !== 'all'
 
   return (
-    <div className="flex flex-col flex-1 min-h-0">
+    <>
+    <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
       {/* Top bar */}
       <div className="shrink-0 border-b bg-white dark:bg-gray-900 dark:border-gray-800 px-4 py-3 space-y-3 transition-colors duration-200">
         {/* Title + actions row */}
@@ -173,17 +174,16 @@ export default function Inventory(): JSX.Element {
       </div>
 
       {/* Table */}
-      <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
-        <InventoryTable
-          items={items}
-          loading={loading}
-          selectedIds={selectedIds}
-          onSelectionChange={setSelectedIds}
-          onEdit={openEdit}
-          onDelete={handleDelete}
-          paginate={hasActiveFilters}
-        />
-      </div>
+      <InventoryTable
+        items={items}
+        loading={loading}
+        selectedIds={selectedIds}
+        onSelectionChange={setSelectedIds}
+        onEdit={openEdit}
+        onDelete={handleDelete}
+        paginate={hasActiveFilters}
+      />
+    </div>
 
       {/* Add / Edit sheet */}
       <ItemSheet
@@ -212,6 +212,6 @@ export default function Inventory(): JSX.Element {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </div>
+    </>
   )
 }
