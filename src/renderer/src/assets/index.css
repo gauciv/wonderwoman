@@ -3,6 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* MUST live outside @layer so it beats Tailwind preflight/resets in the cascade */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 @layer base {
   :root {
     --background: 0 0% 98%;
@@ -70,10 +78,6 @@
 @layer base {
   * {
     @apply border-border;
-  }
-  html, body, #root {
-    height: 100%;
-    overflow: hidden;
   }
   body {
     @apply bg-background text-foreground;
