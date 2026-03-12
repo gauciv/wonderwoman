@@ -19,10 +19,6 @@ function createWindow(): void {
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
-    // Open DevTools automatically in development so renderer errors are always visible
-    if (is.dev) {
-      mainWindow.webContents.openDevTools()
-    }
   })
 
   // Log renderer-side crashes and load failures so they are never silent
