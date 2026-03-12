@@ -83,13 +83,13 @@ jobs:
           key: electron-linux-${{ hashFiles('package-lock.json') }}
           restore-keys: electron-linux-
 
+      # npm ci strictly follows the Windows-generated lockfile and fails to
+      # resolve Linux optional deps like @rollup/rollup-linux-x64-gnu (npm
+      # bug #4828). A clean npm install resolves deps for the current platform.
       - name: Install dependencies
-        run: npm ci
-
-      # Re-run compatibility patches explicitly — npm ci may silently skip
-      # postinstall when optional native deps are missing (npm bug #4828).
-      - name: Apply compatibility patches
-        run: node scripts/fix-cac-esm.js
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
 
       - name: Build app (electron-vite)
         env:
