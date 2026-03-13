@@ -50,7 +50,7 @@ function exportToPDF(items: InventoryItem[]): void {
   doc.setFont('helvetica', 'bold')
   doc.setFontSize(14)
   doc.setTextColor(13, 43, 82)
-  doc.text('PharmaTracker — Inventory Report', 14, 14)
+  doc.text('PharmaTrack — Inventory Report', 14, 14)
   doc.setFont('helvetica', 'normal')
   doc.setFontSize(9)
   doc.setTextColor(100, 100, 100)

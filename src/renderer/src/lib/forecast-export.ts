@@ -47,7 +47,7 @@ export function exportForecastPDF(rows: ForecastRow[], fileName?: string): void 
   doc.setFont('helvetica', 'bold')
   doc.setFontSize(14)
   doc.setTextColor(13, 43, 82)
-  doc.text('PharmaTracker \u2014 Forecast Report', 14, 14)
+  doc.text('PharmaTrack \u2014 Forecast Report', 14, 14)
 
   // Subtitle
   const criticalCount = rows.filter(r => r.status === 'critical').length

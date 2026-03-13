@@ -59,6 +59,13 @@
         "via": true,
         "Ctrl+Shift+I": true,
         "Splash": true,
-        "2x": true
+        "2x": true,
+        "a": true,
+        "CSV/PDF": true,
+        "e.g.": true,
+        "ExportPreviewModal.": true,
+        "separators": true,
+        "chore:": true,
+        "was": true
     }
 }

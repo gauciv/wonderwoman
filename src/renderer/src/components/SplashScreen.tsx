@@ -23,7 +23,7 @@ export function SplashScreen({ onFinished }: { onFinished: () => void }): JSX.El
       }}
     >
       <img src={logo} alt="" className="h-96 w-96 object-contain animate-pulse" />
-      <span className="text-lg font-semibold text-white tracking-tight">PharmaTracker</span>
+      <span className="text-lg font-semibold text-white tracking-tight">PharmaTrack</span>
     </div>
   )
 }

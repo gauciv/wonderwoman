@@ -51,7 +51,7 @@ export function exportInventoryPDF(items: InventoryItem[], fileName?: string): v
   doc.setFont('helvetica', 'bold')
   doc.setFontSize(14)
   doc.setTextColor(13, 43, 82)
-  doc.text('PharmaTracker \u2014 Inventory Report', 14, 14)
+  doc.text('PharmaTrack \u2014 Inventory Report', 14, 14)
 
   // Subtitle
   const inStock = items.filter(i => getStockStatus(i) === 'in-stock').length

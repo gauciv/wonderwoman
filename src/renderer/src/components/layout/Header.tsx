@@ -5,6 +5,8 @@ import { useAuth } from '../../contexts/AuthContext'
 import { useTheme } from '../../contexts/ThemeContext'
 import { Button } from '../ui/button'
 import { Avatar, AvatarFallback } from '../ui/avatar'
+import { Separator } from '../ui/separator'
+import logo from '../../assets/logo.png'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -63,18 +65,28 @@ export function Header({ onMenuClick }: HeaderProps): JSX.Element {
 
   return (
     <>
-      <header className="flex h-14 shrink-0 items-center justify-between border-b bg-white dark:bg-gray-900 dark:border-gray-800 px-4 gap-3 transition-colors duration-200">
-        {/* Left */}
-        <div className="flex items-center gap-3">
+      <header
+        className="flex shrink-0 items-center justify-between border-b border-white/10 px-3 py-1.5 gap-3"
+        style={{ background: 'linear-gradient(90deg, #0A2040 0%, #0D2B52 100%)' }}
+      >
+        {/* Left — brand + page title */}
+        <div className="flex items-center gap-2">
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden h-8 w-8"
+            className="md:hidden h-8 w-8 text-white hover:bg-white/10 hover:text-white"
             onClick={onMenuClick}
           >
             <Menu className="h-4 w-4" />
           </Button>
-          <h1 className="text-base font-semibold text-charcoal-800 dark:text-gray-100 tracking-tight">{title}</h1>
+          
+          <div className="flex items-center gap-0.5">
+            <img src={logo} alt="PharmaTrack" className="h-8 w-auto object-contain" />
+            <span className="text-base font-bold text-white tracking-tight">PharmaTrack</span>
+          </div>
+          
+          <Separator orientation="vertical" className="ml-1 h-5 bg-white/20" />
+          <span className="text-sm text-blue-200/70">{title}</span>
         </div>
 
         {/* Right */}
@@ -83,7 +95,7 @@ export function Header({ onMenuClick }: HeaderProps): JSX.Element {
           <button
             onClick={toggleTheme}
             title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-            className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-foreground transition-colors"
+            className="flex h-8 w-8 items-center justify-center rounded-md text-blue-200/70 hover:bg-white/10 hover:text-white transition-colors"
           >
             {theme === 'dark'
               ? <Sun className="h-4 w-4" />
@@ -94,9 +106,9 @@ export function Header({ onMenuClick }: HeaderProps): JSX.Element {
           {/* Avatar / dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="flex items-center gap-2 rounded-md px-1 py-0.5 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors outline-none">
+              <button className="flex items-center gap-2 rounded-md px-1 py-0.5 hover:bg-white/10 transition-colors outline-none">
                 <Avatar className="h-7 w-7">
-                  <AvatarFallback style={{ backgroundColor: '#1060C0' }} className="text-white text-[10px] font-bold">
+                  <AvatarFallback style={{ backgroundColor: '#1060C0' }} className="text-white text-[10px] font-bold border border-white/20">
                     {getInitials(currentUser?.email)}
                   </AvatarFallback>
                 </Avatar>
