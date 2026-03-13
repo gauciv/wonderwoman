@@ -1,6 +1,7 @@
 import { useMemo, useState, useCallback } from 'react'
 import {
-  TrendingDown, AlertTriangle, ChevronRight, List, Building2,
+  TrendingDown, AlertTriangle, ChevronRight, ChevronLeft,
+  ChevronsLeft, ChevronsRight, List, Building2,
   Download, Filter, HelpCircle,
 } from 'lucide-react'
 import {
@@ -207,6 +208,14 @@ export default function Forecast(): JSX.Element {
     if (format === 'csv') exportForecastCSV(forecastRows, fileName)
     else exportForecastPDF(forecastRows, fileName)
   }, [forecastRows])
+
+  // Pagination (flat view only)
+  const PAGE_SIZE = 50
+  const [pageIndex, setPageIndex] = useState(0)
+  const pageCount = Math.max(Math.ceil(forecastRows.length / PAGE_SIZE), 1)
+  // Reset to first page when filters change
+  const safePageIndex = Math.min(pageIndex, pageCount - 1)
+  const paginatedRows = forecastRows.slice(safePageIndex * PAGE_SIZE, (safePageIndex + 1) * PAGE_SIZE)
 
   // Chart data
   const runwayBuckets = useMemo(() => buildRunwayBuckets(forecastRows), [forecastRows])
@@ -423,7 +432,7 @@ export default function Forecast(): JSX.Element {
         </div>
 
         {/* View toggle + Table */}
-        <div className="space-y-3">
+        <div className="flex flex-col min-h-0 space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 rounded-md p-0.5">
               <Button
@@ -452,8 +461,29 @@ export default function Forecast(): JSX.Element {
               <p className="text-sm text-muted-foreground">No items match the current filters.</p>
             </div>
           ) : viewMode === 'flat' ? (
-            <div className="rounded-lg border border-silver-200 dark:border-gray-700 overflow-hidden">
-              <ForecastTable rows={forecastRows} />
+            <div className="rounded-lg border border-silver-200 dark:border-gray-700 overflow-hidden flex flex-col">
+              <div className="overflow-auto">
+                <ForecastTable rows={paginatedRows} />
+              </div>
+              <div className="shrink-0 flex items-center justify-between border-t bg-white dark:bg-gray-900 dark:border-gray-800 px-4 py-2">
+                <span className="text-[11px] text-muted-foreground">
+                  Page {safePageIndex + 1} of {pageCount} ({forecastRows.length} items)
+                </span>
+                <div className="flex items-center gap-1">
+                  <Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => setPageIndex(0)} disabled={safePageIndex === 0}>
+                    <ChevronsLeft className="h-3.5 w-3.5" />
+                  </Button>
+                  <Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => setPageIndex(safePageIndex - 1)} disabled={safePageIndex === 0}>
+                    <ChevronLeft className="h-3.5 w-3.5" />
+                  </Button>
+                  <Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => setPageIndex(safePageIndex + 1)} disabled={safePageIndex >= pageCount - 1}>
+                    <ChevronRight className="h-3.5 w-3.5" />
+                  </Button>
+                  <Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => setPageIndex(pageCount - 1)} disabled={safePageIndex >= pageCount - 1}>
+                    <ChevronsRight className="h-3.5 w-3.5" />
+                  </Button>
+                </div>
+              </div>
             </div>
           ) : (
             <VendorGroupedView rows={forecastRows} />
